@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AzureStorage;
-using Lykke.Service.EthereumWorker.Core.DistributedLock;
+using Lykke.Service.Ethereum.Core.DistributedLock;
 
-namespace Lykke.Service.EthereumWorker.AzureRepositories.AzureBlockLock
+namespace Lykke.Service.Ethereum.AzureRepositories.AzureBlockLock
 {
     internal class ReloadingConnectionStringOnFailureAzureLockDecorator : ReloadingOnFailureDecoratorBase<IDistributedLock>, IDistributedLock
     {

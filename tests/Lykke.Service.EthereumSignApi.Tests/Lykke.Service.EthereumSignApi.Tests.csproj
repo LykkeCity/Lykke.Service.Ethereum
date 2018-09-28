@@ -6,6 +6,7 @@
     <Platforms>AnyCPU</Platforms>
     <LangVersion>latest</LangVersion>
     <NoWarn>1701;1702;1705;1591</NoWarn>
+    <RootNamespace>Lykke.Service.Ethereum.Tests</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'ETC-Debug' ">
     <DefineConstants>ETC;DEBUG;ENABLE_SENSITIVE_LOGGING</DefineConstants>
@@ -42,6 +43,6 @@
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Lykke.Service.EthereumSignApi.Services\Lykke.Service.EthereumSignApi.Services.csproj" />
+    <ProjectReference Include="..\..\src\Lykke.Service.EthereumSignApi\Lykke.Service.EthereumSignApi.csproj" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,9 @@
 ﻿using System.Numerics;
 using Lykke.AzureStorage.Tables.Entity.Metamodel;
 using Lykke.AzureStorage.Tables.Entity.Metamodel.Providers;
-using Lykke.Service.EthereumCommon.AzureRepositories.Serializers;
+using Lykke.Service.Ethereum.AzureRepositories.Serializers;
 
-
-namespace Lykke.Service.EthereumCommon.AzureRepositories
+namespace Lykke.Service.Ethereum.AzureRepositories
 {
     public abstract class RepositoryBase
     {

@@ -2,7 +2,7 @@
 using Lykke.Service.BlockchainApi.Contract.Common;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lykke.Service.EthereumApi.Controllers
+namespace Lykke.Service.Ethereum.Controllers
 {
     [PublicAPI, Route("api/capabilities")]
     public class CapabilitiesController : Controller

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lykke.Service.EthereumCommon.Core.Telemetry
+namespace Lykke.Service.Ethereum.Core.Telemetry
 {
     public interface IEventTracker : IDisposable
     {

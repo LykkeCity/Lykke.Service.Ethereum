@@ -2,7 +2,7 @@
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 
-namespace Lykke.Service.EthereumCommon.Core.Telemetry
+namespace Lykke.Service.Ethereum.Core.Telemetry
 {
     public class EventTracker : IEventTracker
     {

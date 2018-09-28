@@ -3,9 +3,9 @@ using System.Numerics;
 using Lykke.AzureStorage.Tables;
 using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
-using Lykke.Service.EthereumCommon.Core;
+using Lykke.Service.Ethereum.Domain;
 
-namespace Lykke.Service.EthereumCommon.AzureRepositories.Entities
+namespace Lykke.Service.Ethereum.AzureRepositories.Entities
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateIfDirty)]
     public class TransactionEntity : AzureTableEntity

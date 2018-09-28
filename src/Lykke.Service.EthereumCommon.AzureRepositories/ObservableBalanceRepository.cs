@@ -6,14 +6,13 @@ using AzureStorage.Tables;
 using Common;
 using JetBrains.Annotations;
 using Lykke.Common.Log;
-using Lykke.Service.EthereumCommon.AzureRepositories.Entities;
-using Lykke.Service.EthereumCommon.Core.Domain;
-using Lykke.Service.EthereumCommon.Core.Repositories;
+using Lykke.Service.Ethereum.AzureRepositories.Entities;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Repositories;
 using Lykke.SettingsReader;
 using Microsoft.WindowsAzure.Storage.Table;
 
-
-namespace Lykke.Service.EthereumCommon.AzureRepositories
+namespace Lykke.Service.Ethereum.AzureRepositories
 {
     [UsedImplicitly]
     public class ObservableBalanceRepository : RepositoryBase, IObservableBalanceRepository

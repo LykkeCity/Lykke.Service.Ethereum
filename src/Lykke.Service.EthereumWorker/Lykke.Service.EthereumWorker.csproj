@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <Version>1.0.1</Version>
     <AssemblyName>Lykke.Service.EthereumWorker</AssemblyName>
-    <RootNamespace>Lykke.Service.EthereumWorker</RootNamespace>
+    <RootNamespace>Lykke.Service.Ethereum</RootNamespace>
     <Configurations>ETC-Test;ETC-Debug;ETC-Dev;ETH-Dev;ETH-Test;ETC-Prod;ETH-Prod;ETH-Debug</Configurations>
     <Platforms>AnyCPU</Platforms>
     <LangVersion>latest</LangVersion>
@@ -48,14 +48,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Lykke.Sdk" Version="5.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Lykke.Service.EthereumCommon\Lykke.Service.EthereumCommon.csproj" />
-    <ProjectReference Include="..\Lykke.Service.EthereumWorker.Core\Lykke.Service.EthereumWorker.Core.csproj" />
-    <ProjectReference Include="..\Lykke.Service.EthereumWorker.Services\Lykke.Service.EthereumWorker.Services.csproj" />
+    <ProjectReference Include="..\Lykke.Service.EthereumWorker.AzureRepositories\Lykke.Service.EthereumWorker.AzureRepositories.csproj" />
+    <ProjectReference Include="..\Lykke.Service.EthereumWorker.Domain\Lykke.Service.EthereumWorker.Domain.csproj" />
+    <ProjectReference Include="..\Lykke.Service.EthereumWorker.DomainServices\Lykke.Service.EthereumWorker.DomainServices.csproj" />
   </ItemGroup>
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
     <ItemGroup>

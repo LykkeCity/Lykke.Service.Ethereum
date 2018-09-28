@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using Lykke.Service.BlockchainApi.Contract.Transactions;
 
-namespace Lykke.Service.EthereumApi.Validation
+namespace Lykke.Service.Ethereum.Validation
 {
     [UsedImplicitly]
     public class BroadcastTransactionRequestValidator : AbstractValidator<BroadcastTransactionRequest>

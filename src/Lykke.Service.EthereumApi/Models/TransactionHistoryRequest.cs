@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lykke.Service.EthereumApi.Models
+namespace Lykke.Service.Ethereum.Models
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class TransactionHistoryRequest

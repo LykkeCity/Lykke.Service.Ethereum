@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Multiformats.Hash;
 using Multiformats.Hash.Algorithms;
 
-namespace Lykke.Service.EthereumCommon.Core.Crypto
+namespace Lykke.Service.Ethereum.Core.Crypto
 {
     public static class Keccak256
     {

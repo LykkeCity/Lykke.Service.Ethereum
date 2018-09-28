@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Lykke.Service.EthereumCommon.Core</AssemblyName>
-    <RootNamespace>Lykke.Service.EthereumCommon.Core</RootNamespace>
     <Version>1.0.1</Version>
     <Configurations>ETC-Test;ETC-Debug;ETC-Dev;ETH-Dev;ETH-Test;ETC-Prod;ETH-Prod;ETH-Debug</Configurations>
     <Platforms>AnyCPU</Platforms>
     <LangVersion>latest</LangVersion>
     <NoWarn>1701;1702;1705;1591</NoWarn>
+    <RootNamespace>Lykke.Service.Ethereum.Core</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'ETC-Debug' ">
     <DefineConstants>ETC;DEBUG;ENABLE_SENSITIVE_LOGGING</DefineConstants>
@@ -35,10 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
-    <PackageReference Include="MessagePack" Version="1.7.3.4" />
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.7.2" />
     <PackageReference Include="Multiformats.Hash" Version="1.3.0" />
-    <PackageReference Include="Nethereum.Parity" Version="2.5.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
+  
 </Project>

@@ -2,11 +2,11 @@
 using Common;
 using FluentValidation;
 using JetBrains.Annotations;
-using Lykke.Service.EthereumApi.Models;
+using Lykke.Service.Ethereum.Models;
 using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 
-namespace Lykke.Service.EthereumApi.Validation
+namespace Lykke.Service.Ethereum.Validation
 {
     [UsedImplicitly]
     public class PaginationRequestValidator : AbstractValidator<PaginationRequest>

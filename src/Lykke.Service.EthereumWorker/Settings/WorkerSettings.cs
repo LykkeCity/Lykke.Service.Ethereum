@@ -3,8 +3,7 @@ using JetBrains.Annotations;
 using Lykke.Common.Chaos;
 using Lykke.SettingsReader.Attributes;
 
-
-namespace Lykke.Service.EthereumWorker.Settings
+namespace Lykke.Service.Ethereum.Settings
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class WorkerSettings

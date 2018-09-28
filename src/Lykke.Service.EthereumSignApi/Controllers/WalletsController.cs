@@ -1,11 +1,10 @@
 ﻿using JetBrains.Annotations;
 using Lykke.Service.BlockchainApi.Contract.Wallets;
-using Lykke.Service.EthereumCommon.Core;
-using Lykke.Service.EthereumSignApi.Core.Services.Interfaces;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
-
-namespace Lykke.Service.EthereumSignApi.Controllers
+namespace Lykke.Service.Ethereum.Controllers
 {
     [PublicAPI, Route("api/wallets")]
     public class WalletsController : Controller

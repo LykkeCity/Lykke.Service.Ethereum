@@ -5,12 +5,12 @@ using AzureStorage.Tables;
 using Common;
 using JetBrains.Annotations;
 using Lykke.Common.Log;
-using Lykke.Service.EthereumCommon.AzureRepositories.Entities;
-using Lykke.Service.EthereumCommon.Core.Domain;
-using Lykke.Service.EthereumCommon.Core.Repositories;
+using Lykke.Service.Ethereum.AzureRepositories.Entities;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Repositories;
 using Lykke.SettingsReader;
 
-namespace Lykke.Service.EthereumCommon.AzureRepositories
+namespace Lykke.Service.Ethereum.AzureRepositories
 {
     [UsedImplicitly]
     public class TransactionRepository : RepositoryBase, ITransactionRepository
@@ -94,7 +94,7 @@ namespace Lykke.Service.EthereumCommon.AzureRepositories
                     data: transactionEntity.Data,
                     deletedOn: transactionEntity.DeletedOn,
                     error: transactionEntity.Error,
-                    from: transactionEntity.From,
+                    @from: transactionEntity.From,
                     gasAmount: transactionEntity.GasAmount,
                     gasPrice: transactionEntity.GasPrice,
                     hash: transactionEntity.Hash,

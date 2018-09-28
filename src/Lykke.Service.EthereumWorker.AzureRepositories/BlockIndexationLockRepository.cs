@@ -7,14 +7,12 @@ using AzureStorage;
 using AzureStorage.Tables;
 using Common;
 using Lykke.Common.Log;
-using Lykke.Service.EthereumCommon.AzureRepositories;
-using Lykke.Service.EthereumWorker.AzureRepositories.Entities;
-using Lykke.Service.EthereumWorker.Core.Domain;
-using Lykke.Service.EthereumWorker.Core.Repositories;
+using Lykke.Service.Ethereum.AzureRepositories.Entities;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Repositories;
 using Lykke.SettingsReader;
 
-
-namespace Lykke.Service.EthereumWorker.AzureRepositories
+namespace Lykke.Service.Ethereum.AzureRepositories
 {
     public class BlockIndexationLockRepository : RepositoryBase, IBlockIndexationLockRepository
     {

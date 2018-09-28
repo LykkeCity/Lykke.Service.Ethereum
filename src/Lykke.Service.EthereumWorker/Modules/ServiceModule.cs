@@ -3,18 +3,14 @@ using Common;
 using JetBrains.Annotations;
 using Lykke.Common.Chaos;
 using Lykke.Common.Log;
-using Lykke.Service.EthereumCommon.AzureRepositories;
-using Lykke.Service.EthereumCommon.Core.Repositories;
-using Lykke.Service.EthereumWorker.AzureRepositories;
-using Lykke.Service.EthereumWorker.Core.Repositories;
-using Lykke.Service.EthereumWorker.Core.Services;
-using Lykke.Service.EthereumWorker.QueueConsumers;
-using Lykke.Service.EthereumWorker.Services;
-using Lykke.Service.EthereumWorker.Settings;
+using Lykke.Service.Ethereum.AzureRepositories;
+using Lykke.Service.Ethereum.Domain.Repositories;
+using Lykke.Service.Ethereum.Domain.Services;
+using Lykke.Service.Ethereum.QueueConsumers;
+using Lykke.Service.Ethereum.Settings;
 using Lykke.SettingsReader;
 
-
-namespace Lykke.Service.EthereumWorker.Modules
+namespace Lykke.Service.Ethereum.Modules
 {
     [UsedImplicitly]
     public class ServiceModule : Module
@@ -51,13 +47,13 @@ namespace Lykke.Service.EthereumWorker.Modules
             // BalanceObservationQueueConsumer
 
             builder
-                .RegisterType<BalanceObservationQueueConsumer>()
+                .RegisterType<BalanceObservationQueueConsumerBase>()
                 .As<IStartable>()
                 .As<IStopable>()
                 .SingleInstance();
             
             builder
-                .RegisterInstance(new BalanceObservationQueueConsumer.Settings
+                .RegisterInstance(new BalanceObservationQueueConsumerBase.Settings
                 {
                     MaxDegreeOfParallelism = ServiceSettings.BalanceObservationMaxDegreeOfParallelism
                 })
@@ -66,13 +62,13 @@ namespace Lykke.Service.EthereumWorker.Modules
             // BlockchainIndexationQueueConsumer
 
             builder
-                .RegisterType<BlockchainIndexationQueueConsumer>()
+                .RegisterType<BlockchainIndexationQueueConsumerBase>()
                 .As<IStartable>()
                 .As<IStopable>()
                 .SingleInstance();
             
             builder
-                .RegisterInstance(new BlockchainIndexationQueueConsumer.Settings
+                .RegisterInstance(new BlockchainIndexationQueueConsumerBase.Settings
                 {
                     MaxDegreeOfParallelism = ServiceSettings.BlockchainIndexingMaxDegreeOfParallelism
                 })
@@ -81,13 +77,13 @@ namespace Lykke.Service.EthereumWorker.Modules
             // TransactionMonitoringQueueConsumer
 
             builder
-                .RegisterType<TransactionMonitoringQueueConsumer>()
+                .RegisterType<TransactionMonitoringQueueConsumerBase>()
                 .As<IStartable>()
                 .As<IStopable>()
                 .SingleInstance();
             
             builder
-                .RegisterInstance(new TransactionMonitoringQueueConsumer.Settings
+                .RegisterInstance(new TransactionMonitoringQueueConsumerBase.Settings
                 {
                     MaxDegreeOfParallelism = ServiceSettings.TransactionMonitoringMaxDegreeOfParallelism
                 })

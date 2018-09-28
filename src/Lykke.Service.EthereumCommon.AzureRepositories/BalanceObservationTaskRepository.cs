@@ -1,10 +1,10 @@
 ﻿using System;
 using AzureStorage.Queue;
-using Lykke.Service.EthereumCommon.Core.Domain;
-using Lykke.Service.EthereumCommon.Core.Repositories;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Repositories;
 using Lykke.SettingsReader;
 
-namespace Lykke.Service.EthereumCommon.AzureRepositories
+namespace Lykke.Service.Ethereum.AzureRepositories
 {
     public class BalanceObservationTaskRepository : TaskRepositoryBase<BalanceObservationTask>, IBalanceObservationTaskRepository
     {

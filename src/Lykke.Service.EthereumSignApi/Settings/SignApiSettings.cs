@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace Lykke.Service.EthereumSignApi.Settings
+namespace Lykke.Service.Ethereum.Settings
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class SignApiSettings

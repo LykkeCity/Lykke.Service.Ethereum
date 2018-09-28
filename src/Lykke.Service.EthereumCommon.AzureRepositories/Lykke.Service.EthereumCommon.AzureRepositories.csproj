@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Lykke.Service.EthereumCommon.AzureRepositories</AssemblyName>
-    <RootNamespace>Lykke.Service.EthereumCommon.AzureRepositories</RootNamespace>
+    <RootNamespace>Lykke.Service.Ethereum.AzureRepositories</RootNamespace>
     <Version>1.0.1</Version>
     <Configurations>ETC-Test;ETC-Debug;ETC-Dev;ETH-Dev;ETH-Test;ETC-Prod;ETH-Prod;ETH-Debug</Configurations>
     <Platforms>AnyCPU</Platforms>
@@ -39,5 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lykke.Service.EthereumCommon.Core\Lykke.Service.EthereumCommon.Core.csproj" />
+    <ProjectReference Include="..\Lykke.Service.EthereumCommon.Domain\Lykke.Service.EthereumCommon.Domain.csproj" />
   </ItemGroup>
 </Project>

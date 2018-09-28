@@ -3,15 +3,13 @@ using Autofac;
 using JetBrains.Annotations;
 using Lykke.Common.Chaos;
 using Lykke.Common.Log;
-using Lykke.Service.EthereumApi.Core.Services;
-using Lykke.Service.EthereumApi.Services;
-using Lykke.Service.EthereumApi.Settings;
-using Lykke.Service.EthereumCommon.AzureRepositories;
-using Lykke.Service.EthereumCommon.Core.Repositories;
+using Lykke.Service.Ethereum.AzureRepositories;
+using Lykke.Service.Ethereum.Domain.Repositories;
+using Lykke.Service.Ethereum.Domain.Services;
+using Lykke.Service.Ethereum.Settings;
 using Lykke.SettingsReader;
 
-
-namespace Lykke.Service.EthereumApi.Modules
+namespace Lykke.Service.Ethereum.Modules
 {
     [UsedImplicitly]
     public class ServiceModule : Module

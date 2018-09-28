@@ -2,9 +2,9 @@
 using System.Numerics;
 using System.Text.RegularExpressions;
 using FluentValidation;
-using Lykke.Service.EthereumCommon.Core;
+using Lykke.Service.Ethereum.Domain;
 
-namespace Lykke.Service.EthereumApi.Validation
+namespace Lykke.Service.Ethereum.Validation
 {
     public static class Rules
     {

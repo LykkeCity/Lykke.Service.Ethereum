@@ -1,13 +1,11 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Lykke.Sdk;
-using Lykke.Service.EthereumCommon;
-using Lykke.Service.EthereumWorker.Settings;
+using Lykke.Service.Ethereum.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-
-namespace Lykke.Service.EthereumWorker
+namespace Lykke.Service.Ethereum
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class Startup

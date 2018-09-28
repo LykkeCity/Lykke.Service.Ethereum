@@ -1,7 +1,6 @@
 ﻿using Microsoft.ApplicationInsights;
 
-
-namespace Lykke.Service.EthereumCommon.Core.Telemetry
+namespace Lykke.Service.Ethereum.Core.Telemetry
 {
     public static class TelemetryClientExtensions
     {

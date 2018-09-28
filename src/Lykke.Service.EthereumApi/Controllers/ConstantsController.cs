@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lykke.Service.EthereumApi.Controllers
+namespace Lykke.Service.Ethereum.Controllers
 {
     [PublicAPI, Route("api/constants")]
     public class ConstantsController : Controller

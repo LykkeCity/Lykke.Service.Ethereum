@@ -4,13 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Lykke.Service.BlockchainApi.Contract.Transactions;
-using Lykke.Service.EthereumApi.Models;
-using Lykke.Service.EthereumCommon.Core;
-using Lykke.Service.EthereumCommon.Core.Domain;
-using Lykke.Service.EthereumApi.Core.Services;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Services;
+using Lykke.Service.Ethereum.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lykke.Service.EthereumApi.Controllers
+namespace Lykke.Service.Ethereum.Controllers
 {
     [PublicAPI, Route("/api/transactions/history")]
     public class TransactionsHistoryController : Controller

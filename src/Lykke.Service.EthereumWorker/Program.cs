@@ -2,8 +2,7 @@
 using JetBrains.Annotations;
 using Lykke.Sdk;
 
-
-namespace Lykke.Service.EthereumWorker
+namespace Lykke.Service.Ethereum
 {
     [UsedImplicitly]
     internal sealed class Program

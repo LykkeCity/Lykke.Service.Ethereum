@@ -2,7 +2,7 @@
 using System.Numerics;
 using Lykke.AzureStorage.Tables.Entity.Serializers;
 
-namespace Lykke.Service.EthereumCommon.AzureRepositories.Serializers
+namespace Lykke.Service.Ethereum.AzureRepositories.Serializers
 {
     public class BigIntegerSerializer : IStorageValueSerializer
     {

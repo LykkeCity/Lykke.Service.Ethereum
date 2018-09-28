@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Lykke.Service.BlockchainApi.Contract;
 using Lykke.Service.BlockchainApi.Contract.Balances;
-using Lykke.Service.EthereumApi.Models;
-using Lykke.Service.EthereumCommon.Core;
-using Lykke.Service.EthereumApi.Core.Services;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Services;
+using Lykke.Service.Ethereum.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lykke.Service.EthereumApi.Controllers
+namespace Lykke.Service.Ethereum.Controllers
 {
     [PublicAPI, Route("api/balances")]
     public class BalancesController : Controller

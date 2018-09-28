@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 using Lykke.Service.BlockchainApi.Contract.Transactions;
-using Lykke.Service.EthereumSignApi.Core.Services.Interfaces;
+using Lykke.Service.Ethereum.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
-
-namespace Lykke.Service.EthereumSignApi.Controllers
+namespace Lykke.Service.Ethereum.Controllers
 {
     [PublicAPI, Route("api/sign")]
     public class SignController : Controller

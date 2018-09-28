@@ -3,7 +3,7 @@ using Lykke.AzureStorage.Tables;
 using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
 
-namespace Lykke.Service.EthereumCommon.AzureRepositories.Entities
+namespace Lykke.Service.Ethereum.AzureRepositories.Entities
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateIfDirty)]
     public class ObservableBalanceEntity : AzureTableEntity

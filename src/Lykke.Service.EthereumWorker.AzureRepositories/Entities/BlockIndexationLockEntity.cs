@@ -2,7 +2,7 @@
 using System.Numerics;
 using Lykke.AzureStorage.Tables;
 
-namespace Lykke.Service.EthereumWorker.AzureRepositories.Entities
+namespace Lykke.Service.Ethereum.AzureRepositories.Entities
 {
     public class BlockIndexationLockEntity : AzureTableEntity
     {

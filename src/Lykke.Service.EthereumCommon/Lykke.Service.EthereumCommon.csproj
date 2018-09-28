@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Lykke.Service.EthereumCommon</AssemblyName>
-    <RootNamespace>Lykke.Service.EthereumCommon</RootNamespace>
+    <RootNamespace>Lykke.Service.Ethereum</RootNamespace>
     <Version>1.0.1</Version>
     <Configurations>ETC-Test;ETC-Debug;ETC-Dev;ETH-Dev;ETH-Test;ETC-Prod;ETH-Prod;ETH-Debug</Configurations>
     <Platforms>AnyCPU</Platforms>
@@ -35,9 +35,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Lykke.Sdk" Version="5.3.1" />
+    <PackageReference Include="Lykke.Service.BlockchainApi.Contract" Version="13.2.0" />
+    <PackageReference Include="Lykke.SettingsReader" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lykke.Service.EthereumCommon.AzureRepositories\Lykke.Service.EthereumCommon.AzureRepositories.csproj" />
     <ProjectReference Include="..\Lykke.Service.EthereumCommon.Core\Lykke.Service.EthereumCommon.Core.csproj" />
+    <ProjectReference Include="..\Lykke.Service.EthereumCommon.DomainServices\Lykke.Service.EthereumCommon.DomainServices.csproj" />
+    <ProjectReference Include="..\Lykke.Service.EthereumCommon.Domain\Lykke.Service.EthereumCommon.Domain.csproj" />
   </ItemGroup>
 </Project>

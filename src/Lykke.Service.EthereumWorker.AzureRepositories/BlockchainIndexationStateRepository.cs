@@ -3,16 +3,14 @@ using System.IO;
 using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Blob;
-using Lykke.Service.EthereumCommon.AzureRepositories;
-using Lykke.Service.EthereumWorker.AzureRepositories.AzureBlockLock;
-using Lykke.Service.EthereumWorker.Core.DistributedLock;
-using Lykke.Service.EthereumWorker.Core.Domain;
-using Lykke.Service.EthereumWorker.Core.Repositories;
+using Lykke.Service.Ethereum.AzureRepositories.AzureBlockLock;
+using Lykke.Service.Ethereum.Core.DistributedLock;
+using Lykke.Service.Ethereum.Domain;
+using Lykke.Service.Ethereum.Domain.Repositories;
 using Lykke.SettingsReader;
 using MessagePack;
 
-
-namespace Lykke.Service.EthereumWorker.AzureRepositories
+namespace Lykke.Service.Ethereum.AzureRepositories
 {
     public class BlockchainIndexationStateRepository : RepositoryBase, IBlockchainIndexationStateRepository
     {

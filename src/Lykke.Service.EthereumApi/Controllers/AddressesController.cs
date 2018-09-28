@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Lykke.Service.BlockchainApi.Contract.Addresses;
-using Lykke.Service.EthereumApi.Models;
-using Lykke.Service.EthereumApi.Core.Services;
-using Microsoft.AspNetCore.Mvc;
+using Lykke.Service.Ethereum.Domain.Services;
+using Lykke.Service.Ethereum.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-
-namespace Lykke.Service.EthereumApi.Controllers
+namespace Lykke.Service.Ethereum.Controllers
 {
     [PublicAPI, Route("/api/addresses")]
     public class AddressesController : Controller

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lykke.Service.EthereumWorker.Core.DistributedLock;
+using Lykke.Service.Ethereum.Core.DistributedLock;
 using Lykke.SettingsReader;
 using Microsoft.AspNetCore.Http;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
-namespace Lykke.Service.EthereumWorker.AzureRepositories.AzureBlockLock
+namespace Lykke.Service.Ethereum.AzureRepositories.AzureBlockLock
 {
     public class AzureBlobLock : IDistributedLock
     {

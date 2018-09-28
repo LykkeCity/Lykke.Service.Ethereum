@@ -3,12 +3,11 @@ using System.Threading.Tasks;
 using AzureStorage.Queue;
 using Common;
 using JetBrains.Annotations;
-using Lykke.Service.EthereumCommon.Core.Repositories;
+using Lykke.Service.Ethereum.Domain.Repositories;
 using MessagePack;
 using Microsoft.WindowsAzure.Storage.Queue;
 
-
-namespace Lykke.Service.EthereumCommon.AzureRepositories
+namespace Lykke.Service.Ethereum.AzureRepositories
 {
     public abstract class TaskRepositoryBase<T> : RepositoryBase, ITaskRepository<T>
         where T : class, new()
