@@ -41,4 +41,7 @@
     <ProjectReference Include="..\..\src\Lykke.Service.EthereumCommon\Lykke.Service.EthereumCommon.csproj" />
     <ProjectReference Include="..\Lykke.Service.EthereumCommon.Tests.Core\Lykke.Service.EthereumCommon.Tests.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core" />
+  </ItemGroup>
 </Project>

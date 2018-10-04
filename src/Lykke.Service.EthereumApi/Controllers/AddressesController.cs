@@ -32,6 +32,8 @@ namespace Lykke.Service.Ethereum.Controllers
 
         #region Not Implemented Endpoints
         
+        // TODO: Fix response types
+        
         [HttpGet("{address}/balance")]
         public ActionResult<AddressValidationResponse> GetBalance(
             AddressRequest address)
