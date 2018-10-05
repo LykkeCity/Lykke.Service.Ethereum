@@ -3,16 +3,21 @@ using System.Threading.Tasks;
 
 namespace Lykke.Service.Ethereum.Core.Blockchain
 {
-    public interface IBlockchainClient
+    public interface IWeb3Client
     {
         Task<BigInteger> GetBalanceAsync(
-            BlockchainAddress blockchainAddress,
-            BlockSelector block);
+            string address,
+            string block);
+
+        Task<object> GetBestBlockNumberAsync();
+
+        Task<object> GetBlockWithTransactionsAsync(
+            string block);
 
         Task<object> GetCodeAsync(
-            BlockchainAddress blockchainAddress);
+            string address);
         
-        Task<BigInteger> GetGasPriceAsync();
+        Task<object> GetGasPriceAsync();
 
         Task<object> GetTransactionAsync(
             string transactionHash);
