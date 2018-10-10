@@ -1,5 +1,5 @@
 using System;
-using Lykke.Service.Ethereum.Core.Blockchain.Models;
+using Lykke.Service.Ethereum.Core.Blockchain.DTOs;
 
 namespace Lykke.Service.Ethereum.Core.Blockchain.Exceptions
 {

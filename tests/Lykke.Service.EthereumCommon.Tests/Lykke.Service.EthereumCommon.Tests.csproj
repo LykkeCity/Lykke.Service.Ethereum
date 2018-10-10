@@ -6,7 +6,7 @@
     <Platforms>AnyCPU</Platforms>
     <LangVersion>latest</LangVersion>
     <NoWarn>1701;1702;1705;1591</NoWarn>
-    <RootNamespace>Lykke.Service.Ethereum.Tests</RootNamespace>
+    <RootNamespace>Lykke.Service.Ethereum</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'ETC-Debug' ">
     <DefineConstants>ETC;DEBUG;ENABLE_SENSITIVE_LOGGING</DefineConstants>

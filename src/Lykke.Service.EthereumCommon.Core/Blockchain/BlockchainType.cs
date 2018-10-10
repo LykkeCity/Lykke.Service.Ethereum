@@ -1,4 +1,4 @@
-namespace Lykke.Service.Ethereum.Core
+namespace Lykke.Service.Ethereum.Core.Blockchain
 {
     public enum BlockchainType
     {

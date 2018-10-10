@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.ApplicationInsights;
@@ -92,3 +93,4 @@ namespace Lykke.Service.Ethereum.Domain.Services
         }
     }
 }
+*/
