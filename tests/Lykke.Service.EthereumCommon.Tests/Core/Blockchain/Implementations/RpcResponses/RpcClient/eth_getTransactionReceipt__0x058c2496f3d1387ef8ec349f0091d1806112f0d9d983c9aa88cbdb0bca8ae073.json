@@ -1,0 +1,31 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "transactionHash": "0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae073",
+    "transactionIndex": "0x0",
+    "blockHash": "0xb63060040b598878577064d070cf0f3ef52fa70d5ba46223266bd25f59b7f7a1",
+    "blockNumber": "0xc722f",
+    "cumulativeGasUsed": "0x010ea0",
+    "gasUsed": "0x010ea0",
+    "contractAddress": null,
+    "logs": [
+      {
+        "logIndex": "0x0",
+        "blockNumber": "0xc722f",
+        "blockHash": "0xb63060040b598878577064d070cf0f3ef52fa70d5ba46223266bd25f59b7f7a1",
+        "transactionHash": "0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae073",
+        "transactionIndex": "0x0",
+        "address": "0x0000000000000000000000000000000001000006",
+        "data": "0x9449f10f59d693f0c7f3d2449da03e8f75f1535c68",
+        "topics": [
+          "0x00000000000000007570646174655f636f6c6c656374696f6e735f746f706963"
+        ]
+      }
+    ],
+    "from": "0x49f10f59d693f0c7f3d2449da03e8f75f1535c68",
+    "to": "0x0000000000000000000000000000000001000006",
+    "root": "0x01",
+    "status": "0x01"
+  }
+}

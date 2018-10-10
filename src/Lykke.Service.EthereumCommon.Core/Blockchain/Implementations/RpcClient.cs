@@ -43,7 +43,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             string address,
             string blockIdentifier)
         {
-            var request = new RpcRequest("eth_getBalance", address, blockIdentifier);
+            var request = new RpcRequest(method: "eth_getBalance", address, blockIdentifier);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -54,7 +54,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         /// <inheritdoc />
         public virtual async Task<BigInteger> GetBestBlockNumberAsync()
         {
-            var request = new RpcRequest("eth_blockNumber");
+            var request = new RpcRequest(method: "eth_blockNumber");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -66,7 +66,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         public virtual async Task<BlockResult> GetBlockAsync(
             bool includeTransactions)
         {
-            var request = new RpcRequest("eth_getBlockByNumber", BestBlockIdentifier, $"{includeTransactions}");
+            var request = new RpcRequest(method: "eth_getBlockByNumber", BestBlockIdentifier, $"{includeTransactions}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -79,7 +79,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             string blockHash,
             bool includeTransactions)
         {
-            var request = new RpcRequest("eth_getBlockByHash", blockHash, $"{includeTransactions}");
+            var request = new RpcRequest(method: "eth_getBlockByHash", blockHash, $"{includeTransactions}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -92,7 +92,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             BigInteger blockNumber,
             bool includeTransactions)
         {
-            var request = new RpcRequest("eth_getBlockByNumber", $"{blockNumber}", $"{includeTransactions}");
+            var request = new RpcRequest(method: "eth_getBlockByNumber", $"{blockNumber}", $"{includeTransactions}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -174,7 +174,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             string address,
             string blockIdentifier)
         {
-            var request = new RpcRequest("eth_getCode", address, blockIdentifier);
+            var request = new RpcRequest(method: "eth_getCode", address, blockIdentifier);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -185,7 +185,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         /// <inheritdoc />
         public async Task<BigInteger> GetGasPriceAsync()
         {
-            var request = new RpcRequest("eth_gasPrice");
+            var request = new RpcRequest(method: "eth_gasPrice");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -197,7 +197,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         public virtual async Task<TransactionResult> GetTransactionAsync(
             string transactionHash)
         {
-            var request = new RpcRequest("eth_sendRawTransaction", transactionHash);
+            var request = new RpcRequest(method: "eth_sendRawTransaction", transactionHash);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -222,7 +222,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         public virtual async Task<TransactionReceiptResult> GetTransactionReceiptAsync(
             string transactionHash)
         {
-            var request = new RpcRequest("eth_getTransactionReceipt", transactionHash);
+            var request = new RpcRequest(method: "eth_getTransactionReceipt", transactionHash);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -246,7 +246,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         public virtual async Task<string> SendRawTransactionAsync(
             string transactionData)
         {
-            var request = new RpcRequest("eth_sendRawTransaction", transactionData);
+            var request = new RpcRequest(method: "eth_sendRawTransaction", $"{{\"data\":\"{transactionData}\"}}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();

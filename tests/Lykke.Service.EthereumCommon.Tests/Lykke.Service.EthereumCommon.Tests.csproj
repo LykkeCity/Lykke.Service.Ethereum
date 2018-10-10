@@ -44,4 +44,9 @@
   <ItemGroup>
     <Folder Include="Core" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Core\Blockchain\Implementations\RpcResponses\RpcClient\*.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
