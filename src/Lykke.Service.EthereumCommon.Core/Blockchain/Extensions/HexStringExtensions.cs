@@ -64,6 +64,19 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Extensions
 
             return bytes;
         }
+
+        public static BigInteger? HexToNullableBigInteger(
+            this string hexString)
+        {
+            if (!string.IsNullOrEmpty(hexString))
+            {
+                return hexString.HexToBigInteger();
+            }
+            else
+            {
+                return null;
+            }
+        }
         
         private static byte ToByteWithShift(
             this char character,

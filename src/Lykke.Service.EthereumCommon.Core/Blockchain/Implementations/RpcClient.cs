@@ -92,7 +92,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             BigInteger blockNumber,
             bool includeTransactions)
         {
-            var request = new RpcRequest(method: "eth_getBlockByNumber", $"{blockNumber}", $"{includeTransactions}");
+            var request = new RpcRequest(method: "eth_getBlockByNumber", $"{blockNumber.ToHexString()}", $"{includeTransactions}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
@@ -104,63 +104,53 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             RpcResponse response,
             bool includeTransactions)
         {
-            var transactionTokens = response.Result.Values("transactions").ToList();
+            if (response.Result.Type != JTokenType.Null)
+            {
+                var transactions = response.Result.Value<JArray>("transactions").ToList();
 
-            IEnumerable<TransactionResult> GetTransactions()
-            {
-                if (includeTransactions)
+                IEnumerable<TransactionResult> GetTransactions()
                 {
-                    return transactionTokens.Select(x => new TransactionResult
-                    (
-                        blockHash: x.Value<string>("blockHash"),
-                        blockNumber: x.Value<BigInteger?>("blockNumber"),
-                        from: x.Value<string>("from"),
-                        gas: x.Value<BigInteger>("gas"),
-                        gasPrice: x.Value<BigInteger>("gasPrice"),
-                        input: x.Value<string>("input"),
-                        nonce: x.Value<BigInteger>("nonce"),
-                        to: x.Value<string>("to"),
-                        transactionIndex: x.Value<BigInteger?>("transactionIndex"),
-                        transactionHash: x.Value<string>("hash"),
-                        value: x.Value<BigInteger>("value")
-                    ));
+                    return includeTransactions 
+                        ? transactions.Select(GetTransaction)
+                        : null;
                 }
-                else
+            
+                // ReSharper disable once ImplicitlyCapturedClosure
+                IEnumerable<string> GetTransactionHashes()
                 {
-                    return null;
+                    return includeTransactions 
+                        ? transactions.Select(x => x.Value<string>("hash"))
+                        : transactions.Select(x => x.Value<string>());
                 }
+                
+                return new BlockResult
+                (
+                    blockHash: response.ResultValue<string>("hash"),
+                    difficulty: response.ResultValue<BigInteger>("difficulty"),
+                    extraData: response.ResultValue<string>("extraData"),
+                    gasLimit: response.ResultValue<BigInteger>("gasLimit"),
+                    gasUsed: response.ResultValue<BigInteger>("gasUsed"),
+                    logsBloom: response.ResultValue<string>("logsBloom"),
+                    miner: response.ResultValue<string>("miner"),
+                    nonce: response.ResultValue<string>("nonce"),
+                    number: response.ResultValue<BigInteger?>("number"),
+                    parentHash: response.ResultValue<string>("parentHash"),
+                    receiptsRoot: response.ResultValue<string>("receiptsRoot"),
+                    sha3Uncles: response.ResultValue<string>("sha3Uncles"),
+                    size: response.ResultValue<BigInteger>("size"),
+                    stateRoot: response.ResultValue<string>("stateRoot"),
+                    timestamp: response.ResultValue<BigInteger>("timestamp"),
+                    totalDifficulty: response.ResultValue<BigInteger>("totalDifficulty"),
+                    transactionHashes: GetTransactionHashes(),
+                    transactions: GetTransactions(),
+                    transactionsRoot: response.ResultValue<string>("transactionsRoot"),
+                    uncles: response.Result.Value<JArray>("uncles").Select(x => x.Value<string>())
+                );
             }
-            
-            IEnumerable<string> GetTransactionHashes()
+            else
             {
-                return transactionTokens.Select(x => x.Value<string>("hash"));
+                return null;
             }
-            
-            return new BlockResult
-            (
-                author: response.ResultValue<string>("author"),
-                blockHash: response.ResultValue<string>("blockHash"),
-                difficulty: response.ResultValue<BigInteger>("difficulty"),
-                extraData: response.ResultValue<string>("extraData"),
-                gasLimit: response.ResultValue<BigInteger>("gasLimit"),
-                gasUsed: response.ResultValue<BigInteger>("gasUsed"),
-                logsBloom: response.ResultValue<string>("logsBloom"),
-                miner: response.ResultValue<string>("miner"),
-                nonce: response.ResultValue<string>("nonce"),
-                number: response.ResultValue<BigInteger?>("number"),
-                parentHash: response.ResultValue<string>("parentHash"),
-                receiptsRoot: response.ResultValue<string>("receiptsRoot"),
-                sealFields: response.Result.Values<string>("sealFields"),
-                sha3Uncles: response.ResultValue<string>("sha3Uncles"),
-                size: response.ResultValue<BigInteger>("size"),
-                stateRoot: response.ResultValue<string>("stateRoot"),
-                timestamp: response.ResultValue<BigInteger>("timestamp"),
-                totalDifficulty: response.ResultValue<BigInteger>("totalDifficulty"),
-                transactionHashes: GetTransactionHashes(),
-                transactions: GetTransactions(),
-                transactionsRoot: response.ResultValue<string>("transactionsRoot"),
-                uncles: response.Result.Values<string>("uncles")
-            );
         }
 
         /// <inheritdoc />
@@ -178,7 +168,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
-            
+
             return response.ResultValue<string>();
         }
 
@@ -197,24 +187,37 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         public virtual async Task<TransactionResult> GetTransactionAsync(
             string transactionHash)
         {
-            var request = new RpcRequest(method: "eth_sendRawTransaction", transactionHash);
+            var request = new RpcRequest(method: "eth_getTransactionByHash", transactionHash);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
             response.EnsureSuccessResult();
 
+            if (response.Result.Type != JTokenType.Null)
+            {
+                return GetTransaction(response.Result);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        protected virtual TransactionResult GetTransaction(
+            JToken jToken)
+        {
             return new TransactionResult
             (
-                blockHash: response.ResultValue<string>("blockHash"),
-                blockNumber: response.ResultValue<BigInteger?>("blockNumber"),
-                from: response.ResultValue<string>("from"),
-                gas: response.ResultValue<BigInteger>("gas"),
-                gasPrice: response.ResultValue<BigInteger>("gasPrice"),
-                input: response.ResultValue<string>("input"),
-                nonce: response.ResultValue<BigInteger>("nonce"),
-                to: response.ResultValue<string>("to"),
-                transactionIndex: response.ResultValue<BigInteger?>("transactionIndex"),
-                transactionHash: response.ResultValue<string>("hash"),
-                value: response.ResultValue<BigInteger>("value")
+                blockHash: jToken.Value<string>("blockHash"),
+                blockNumber: jToken.Value<string>("blockNumber").HexToNullableBigInteger(),
+                from: jToken.Value<string>("from"),
+                gas: jToken.Value<string>("gas").HexToBigInteger(),
+                gasPrice: jToken.Value<string>("gasPrice").HexToBigInteger(),
+                input: jToken.Value<string>("input"),
+                nonce: jToken.Value<string>("nonce").HexToBigInteger(),
+                to: jToken.Value<string>("to"),
+                transactionIndex: jToken.Value<string>("transactionIndex").HexToNullableBigInteger(),
+                transactionHash: jToken.Value<string>("hash"),
+                value: jToken.Value<string>("value").HexToBigInteger()
             );
         }
 
@@ -227,19 +230,24 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
 
             response.EnsureSuccessResult();
 
-            var result = response.Result;
-            
-            return new TransactionReceiptResult
-            (
-                blockHash: response.ResultValue<string>("blockHash"),
-                blockNumber: response.ResultValue<BigInteger>("blockNumber"),
-                contractAddress: response.ResultValue<string>("contractAddress"),
-                cumulativeGasUsed: response.ResultValue<BigInteger>("cumulativeGasUsed"),
-                gasUsed: response.ResultValue<BigInteger>("gasUsed"),
-                status: response.ResultValue<BigInteger>("status"),
-                transactionIndex: response.ResultValue<BigInteger>("transactionIndex"),
-                transactionHash: response.ResultValue<string>("transactionHash")
-            );
+            if (response.Result.Type != JTokenType.Null)
+            {
+                return new TransactionReceiptResult
+                (
+                    blockHash: response.ResultValue<string>("blockHash"),
+                    blockNumber: response.ResultValue<BigInteger>("blockNumber"),
+                    contractAddress: response.ResultValue<string>("contractAddress"),
+                    cumulativeGasUsed: response.ResultValue<BigInteger>("cumulativeGasUsed"),
+                    gasUsed: response.ResultValue<BigInteger>("gasUsed"),
+                    status: response.ResultValue<BigInteger>("status"),
+                    transactionIndex: response.ResultValue<BigInteger>("transactionIndex"),
+                    transactionHash: response.ResultValue<string>("transactionHash")
+                );
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <inheritdoc />

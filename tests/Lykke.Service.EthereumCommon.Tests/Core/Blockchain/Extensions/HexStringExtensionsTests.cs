@@ -23,5 +23,16 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Extensions
                 .Should()
                 .Be(BigInteger.Parse(expectedBigInteger));
         }
+
+        [DataTestMethod]
+        [DataRow(null)]
+        [DataRow("")]
+        public void HexToNullableBigInteger(
+            string hexString)
+        {
+            hexString.HexToNullableBigInteger()
+                .Should()
+                .Be(default(BigInteger?));
+        }
     }
 }

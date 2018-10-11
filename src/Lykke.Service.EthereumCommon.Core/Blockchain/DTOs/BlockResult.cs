@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Numerics;
 
 namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
@@ -7,7 +8,6 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
     public sealed class BlockResult
     {
         public BlockResult(
-            string author,
             string blockHash,
             BigInteger difficulty,
             string extraData,
@@ -19,7 +19,6 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
             BigInteger? number,
             string parentHash,
             string receiptsRoot,
-            IEnumerable<string> sealFields,
             string sha3Uncles,
             BigInteger size,
             string stateRoot,
@@ -30,7 +29,6 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
             string transactionsRoot,
             IEnumerable<string> uncles)
         {
-            Author = author;
             BlockHash = blockHash;
             Difficulty = difficulty;
             ExtraData = extraData;
@@ -42,22 +40,16 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
             Number = number;
             ParentHash = parentHash;
             ReceiptsRoot = receiptsRoot;
-            SealFields = sealFields.ToImmutableArray();
             Sha3Uncles = sha3Uncles;
             Size = size;
             StateRoot = stateRoot;
             Timestamp = timestamp;
             TotalDifficulty = totalDifficulty;
             TransactionHashes = transactionHashes.ToImmutableArray();
-            Transactions = transactions.ToImmutableArray();
+            Transactions = transactions?.ToImmutableArray();
             TransactionsRoot = transactionsRoot;
             Uncles = uncles.ToImmutableArray();
         }
-
-        /// <summary>
-        ///    Block author.
-        /// </summary>
-        public string Author { get; }
 
         /// <summary>
         ///    Hash of the block.
@@ -115,11 +107,6 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
         public string ReceiptsRoot { get; }
 
         /// <summary>
-        ///    Seal fields.
-        /// </summary>
-        public ImmutableArray<string> SealFields { get; }
-
-        /// <summary>
         ///    SHA3 of the uncles data in the block.
         /// </summary>
         public string Sha3Uncles { get; }
@@ -152,7 +139,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
         /// <summary>
         ///    List of transactions.
         /// </summary>
-        public ImmutableArray<TransactionResult> Transactions { get; }
+        public ImmutableArray<TransactionResult>? Transactions { get; }
 
         /// <summary>
         ///    The root of the transaction trie of the block.
