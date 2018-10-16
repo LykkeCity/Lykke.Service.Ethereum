@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Common.Log;
 using JetBrains.Annotations;
 using Lykke.Common.Log;
-using Lykke.Service.Ethereum.Core.Crypto;
+using Lykke.Service.Ethereum.Core.Blockchain.Crypto;
 using Lykke.SettingsReader;
 using MessagePack;
 using Nethereum.Hex.HexConvertors.Extensions;

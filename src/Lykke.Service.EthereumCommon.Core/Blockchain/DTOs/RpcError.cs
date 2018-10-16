@@ -7,12 +7,14 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.DTOs
     public class RpcError
     {
         [JsonConstructor]
-        private RpcError(
+        public RpcError(
              int code,
-             string message,
-             JToken data)
+             JToken data,
+             string message)
         {
-            
+            Code = code;
+            Data = data;
+            Message = message;
         }
         
         /// <summary>

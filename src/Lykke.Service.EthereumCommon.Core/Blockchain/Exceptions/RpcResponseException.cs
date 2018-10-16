@@ -8,17 +8,11 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Exceptions
         public RpcResponseException(
             RpcError error)
         
-            : base("RPC request resulted with error.")
+            : base($"Rpc request resulted in error [{error.Code}].")
         {
-            ErrorCode = error.Code;
-            ErrorData = error.Data.ToString();
-            ErrorMessage = error.Message;
+            Error = error;
         }
         
-        public int ErrorCode { get; }
-        
-        public string ErrorData { get; }
-        
-        public string ErrorMessage { get; }
+        public RpcError Error { get; }
     }
 }

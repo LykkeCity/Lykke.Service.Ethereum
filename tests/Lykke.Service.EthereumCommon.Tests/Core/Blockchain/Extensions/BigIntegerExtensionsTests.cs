@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,6 +19,25 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Extensions
             BigInteger.Parse(actualBigInteger).ToHexString()
                 .Should()
                 .Be(expectedHexString);
+        }
+
+        [TestMethod]
+        public void ToHexString__Negative_Value_Passed()
+        {
+            Exception expectedException = null;
+            
+            try
+            {
+                (new BigInteger(-1)).ToHexString();
+            }
+            catch (Exception e)
+            {
+                expectedException = e;
+            }
+            
+            expectedException
+                .Should()
+                .BeOfType<NotSupportedException>();
         }
     }
 }

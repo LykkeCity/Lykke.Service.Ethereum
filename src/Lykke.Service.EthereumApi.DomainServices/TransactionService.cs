@@ -46,7 +46,7 @@ namespace Lykke.Service.Ethereum.Domain.Services
         {
             if (amount < _minimalTransactionAmount)
             {
-                _log.Info($"Failed to build transaction [{transactionId}]: amount is too small.");
+                _log.Info($"Failed to build transaction [{transactionId}]: amount [{amount}] is too small.");
                 
                 return BuildTransactionResult.AmountIsTooSmall;
             }
@@ -66,7 +66,7 @@ namespace Lykke.Service.Ethereum.Domain.Services
                 
                 if (balance < amount + transactionFee)
                 {
-                    _log.Info($"Failed to build transaction [{transactionId}]: balance is not enough.");
+                    _log.Info($"Failed to build transaction [{transactionId}]: balance [{balance}] is not enough.");
                     
                     return BuildTransactionResult.BalanceIsNotEnough;
                 }
@@ -122,6 +122,8 @@ namespace Lykke.Service.Ethereum.Domain.Services
             {
                 if (transaction.Amount < _minimalTransactionAmount)
                 {
+                    _log.Info($"Failed to broadcast transaction [{transactionId}]: amount [{transaction.Amount}] is too small.");
+                    
                     return BroadcastTransactionResult.AmountIsTooSmall;
                 }
 
@@ -150,6 +152,8 @@ namespace Lykke.Service.Ethereum.Domain.Services
                         await _transactionRepository.UpdateAsync(transaction);
                         
                         _chaosKitty.Meow(transactionId);
+                        
+                        _log.Info($"Transaction [{transactionId}] has been broadcasted.");
                         
                         return BroadcastTransactionResult.Success(txHash);
                     
@@ -182,6 +186,8 @@ namespace Lykke.Service.Ethereum.Domain.Services
 
                 await _transactionRepository.UpdateAsync(transaction);
 
+                _log.Info($"Transaction [{transactionId}] has been marked as deleted.");
+                
                 return true;
             }
             else

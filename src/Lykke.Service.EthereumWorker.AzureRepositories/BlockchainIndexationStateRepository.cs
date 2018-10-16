@@ -1,14 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Blob;
-using Lykke.Service.Ethereum.AzureRepositories.AzureBlockLock;
+using Common.Log;
+using Lykke.Common.Log;
+using Lykke.Service.Ethereum.AzureRepositories.Extensions;
 using Lykke.Service.Ethereum.Core.DistributedLock;
 using Lykke.Service.Ethereum.Domain;
 using Lykke.Service.Ethereum.Domain.Repositories;
 using Lykke.SettingsReader;
 using MessagePack;
+
 
 namespace Lykke.Service.Ethereum.AzureRepositories
 {
@@ -20,30 +24,25 @@ namespace Lykke.Service.Ethereum.AzureRepositories
 
 
         private readonly IBlobStorage _blobStorage;
-        private readonly IDistributedLock _lock;
+        private readonly ILog _log;
 
 
         private BlockchainIndexationStateRepository(
             IBlobStorage blobStorage,
-            IDistributedLock @lock)
+            ILogFactory logFactory)
         {
             _blobStorage = blobStorage;
-            _lock = @lock;
+            _log = logFactory.CreateLog(this);
         }
 
         public static BlockchainIndexationStateRepository Create(
-            IReloadingManager<string> connectionString)
+            IReloadingManager<string> connectionString,
+            ILogFactory logFactory)
         {
             return new BlockchainIndexationStateRepository
             (
                 AzureBlobStorage.Create(connectionString),
-                AzureBlobLock.Create
-                (
-                    connectionStringManager: connectionString,
-                    container: Container,
-                    key: LockKey,
-                    lockDuration: 60
-                )
+                logFactory
             );
         }
         
@@ -78,7 +77,21 @@ namespace Lykke.Service.Ethereum.AzureRepositories
 
         public Task<IDistributedLockToken> WaitLockAsync()
         {
-            return _lock.WaitAsync();
+            try
+            {
+                return _blobStorage.WaitLockAsync
+                (
+                    container: Container,
+                    key: LockKey,
+                    lockDuration: TimeSpan.FromSeconds(60)
+                );
+            }
+            catch (Exception e)
+            {
+                _log.Error("Failed to obtain distributed lock.", e);
+
+                throw;
+            }
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_getBalance", address, blockIdentifier);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
             
             return response.ResultValue<BigInteger>();
         }
@@ -57,7 +57,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_blockNumber");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
             
             return response.ResultValue<BigInteger>();
         }
@@ -69,7 +69,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_getBlockByNumber", BestBlockIdentifier, $"{includeTransactions}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
             
             return GetBlock(response, includeTransactions);
         }
@@ -82,7 +82,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_getBlockByHash", blockHash, $"{includeTransactions}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
             
             return GetBlock(response, includeTransactions);
         }
@@ -95,7 +95,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_getBlockByNumber", $"{blockNumber.ToHexString()}", $"{includeTransactions}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
 
             return GetBlock(response, includeTransactions);
         }
@@ -167,7 +167,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_getCode", address, blockIdentifier);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
 
             return response.ResultValue<string>();
         }
@@ -178,7 +178,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_gasPrice");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
             
             return response.ResultValue<BigInteger>();
         }
@@ -190,7 +190,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_getTransactionByHash", transactionHash);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
 
             if (response.Result.Type != JTokenType.Null)
             {
@@ -228,7 +228,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_getTransactionReceipt", transactionHash);
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
 
             if (response.Result.Type != JTokenType.Null)
             {
@@ -257,7 +257,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var request = new RpcRequest(method: "eth_sendRawTransaction", $"{{\"data\":\"{transactionData}\"}}");
             var response = await _core.SendRpcRequestWithTelemetryAsync(request);
 
-            response.EnsureSuccessResult();
+            response.EnsureSuccessfulResult();
             
             return response.ResultValue<string>();
         }

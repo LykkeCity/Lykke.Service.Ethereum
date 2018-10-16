@@ -20,6 +20,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         private readonly TimeSpan _connectionTimeout;
         private readonly bool _disableTelemetry;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IntegrationType _integrationType;
         private readonly TelemetryClient _telemetryClient;
 
         
@@ -28,13 +29,15 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             BlockchainType blockchainType,
             TimeSpan connectionTimeout,
             bool disableTelemetry,
-            IHttpClientFactory httpClientFactory)
+            IHttpClientFactory httpClientFactory,
+            IntegrationType integrationType)
         {
             _apiUrl = apiUrl;
             _blockchainType = blockchainType;
             _connectionTimeout = connectionTimeout;
             _disableTelemetry = disableTelemetry;
             _httpClientFactory = httpClientFactory;
+            _integrationType = integrationType;
 
             if (_disableTelemetry)
             {

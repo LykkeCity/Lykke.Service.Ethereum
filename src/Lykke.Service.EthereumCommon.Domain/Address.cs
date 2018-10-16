@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
-using Lykke.Service.Ethereum.Core.Crypto;
+using Lykke.Service.Ethereum.Core.Blockchain.Crypto;
 
 namespace Lykke.Service.Ethereum.Domain
 {
