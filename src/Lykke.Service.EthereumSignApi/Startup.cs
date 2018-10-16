@@ -27,14 +27,16 @@ namespace Lykke.Service.EthereumSignApi
                 #if ENABLE_SENSITIVE_LOGGING
                 
                 enableLogging: true,
+                logsConnString: settings => settings.SignApiService.Db.LogsConnString
                 
                 #else
 
                 enableLogging: false,
+                logsConnString: null
 
                 #endif
                 
-                logsConnString: settings => settings.SignApiService.Db.LogsConnString
+                
             );
         }
     }
