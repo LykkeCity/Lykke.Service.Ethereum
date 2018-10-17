@@ -4,8 +4,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain
     {
         Ethereum,
         EthereumClassic,
-        RootstockMainNet,
-        RootstockTestNet,
+        Rootstock,
         VeChainThor
     }
 }

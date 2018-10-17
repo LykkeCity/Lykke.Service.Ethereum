@@ -5,7 +5,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain
 {
     public interface ITransactionBuilder
     {
-        Task<string> BuildRawTransferTransactionAsync(
+        string BuildRawTransferTransaction(
             string to,
             BigInteger amount,
             BigInteger nonce,

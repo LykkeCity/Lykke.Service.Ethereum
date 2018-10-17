@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
 {
@@ -8,16 +8,13 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
     public class TransactionBuilderCoreTests
     {
         [TestMethod]
-        public async Task BuildRawTransactionAsync()
+        public void BuildRawTransactionAsync()
         {
-            byte[][] transactionElements = null;
-            byte[] privateKey = null;
+            var (transactionElements, privateKey, expectedRawTransaction) = TransactionBuilderTestData.Restore("NonEip155Transaction.json");
             
             var transactionBuilderCore = new TransactionBuilderCore();
-            byte[] expectedRawTransaction = null;
-            byte[] actualRawTransaction = await transactionBuilderCore.BuildRawTransactionAsync(transactionElements, privateKey);
             
-            actualRawTransaction
+            transactionBuilderCore.BuildRawTransaction(transactionElements, privateKey)
                 .Should()
                 .Equal(expectedRawTransaction);
         }

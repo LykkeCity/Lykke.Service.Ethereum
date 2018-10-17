@@ -16,7 +16,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
     public class TransactionBuilderTests
     {
         [TestMethod]
-        public async Task BuildRawTransferTransactionAsync()
+        public void BuildRawTransferTransaction()
         {
             var to = "0xC2D7CF95645D33006175B78989035C7c9061d3F9";
             var amount = new BigInteger(3 * Math.Pow(10,18));
@@ -30,29 +30,32 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             var transactionBuilderCoreMock = new Mock<ITransactionBuilderCore>();
             
             transactionBuilderCoreMock
-                .Setup(x => x.BuildRawTransactionAsync(It.IsAny<IEnumerable<byte[]>>(), It.IsAny<byte[]>()))
+                .Setup(x => x.BuildRawTransaction(It.IsAny<byte[][]>(), It.IsAny<byte[]>()))
                 .Callback<IEnumerable<byte[]>, byte[]>((actualTransactionElements, actualPrivateKey) =>
                 {
-                    actualTransactionElements
+                    actualTransactionElements.Concat()
                         .Should()
                         .Equal
                         (
-                            nonce.ToBytesForRLPEncoding(),
-                            gasPrice.ToBytesForRLPEncoding(),
-                            gasLimit.ToBytesForRLPEncoding(),
-                            to.HexToByteArray(),
-                            amount.ToByteArray(),
-                            null.HexToByteArray()
+                            new []
+                            {
+                                nonce.ToBytesForRLPEncoding(),
+                                gasPrice.ToBytesForRLPEncoding(),
+                                gasLimit.ToBytesForRLPEncoding(),
+                                to.HexToByteArray(),
+                                amount.ToBytesForRLPEncoding(),
+                                Array.Empty<byte>()
+                            }.Concat()
                         );
 
                     actualPrivateKey
                         .Should()
                         .Equal(privateKey.HexToByteArray());
                 })
-                .ReturnsAsync(Array.Empty<byte>());
+                .Returns(Array.Empty<byte>());
             
             
-            await (new TransactionBuilder(transactionBuilderCoreMock.Object)).BuildRawTransferTransactionAsync
+            new TransactionBuilder(transactionBuilderCoreMock.Object).BuildRawTransferTransaction
             (
                 to: to,
                 amount: amount,

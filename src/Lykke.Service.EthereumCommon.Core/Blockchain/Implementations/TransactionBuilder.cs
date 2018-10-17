@@ -18,7 +18,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         }
 
 
-        public async Task<string> BuildRawTransferTransactionAsync(
+        public string BuildRawTransferTransaction(
             string to,
             BigInteger amount,
             BigInteger nonce,
@@ -36,7 +36,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
                 data: null
             );
 
-            var rawTransaction = await _core.BuildRawTransactionAsync
+            var rawTransaction = _core.BuildRawTransaction
             (
                 transactionElements,
                 privateKey.HexToByteArray()
@@ -45,7 +45,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             return rawTransaction.ToHexString();
         }
 
-        private static IEnumerable<byte[]> GetOrderedTransactionElements(
+        private static byte[][] GetOrderedTransactionElements(
             string to,
             BigInteger amount,
             BigInteger nonce,
@@ -59,7 +59,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
                 gasPrice.ToBytesForRLPEncoding(),
                 gasLimit.ToBytesForRLPEncoding(),
                 to.HexToByteArray(),
-                amount.ToByteArray(),
+                amount.ToBytesForRLPEncoding(),
                 data.HexToByteArray()
             };
         }

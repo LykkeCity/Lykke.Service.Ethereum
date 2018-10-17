@@ -4,6 +4,6 @@ namespace Lykke.Service.Ethereum.Core.Blockchain
 {
     public interface IWalletGenerator
     {
-        Task<object> CreateWalletAsync();
+        Task<(string Address, string PrivateKey)> CreateWalletAsync();
     }
 }
