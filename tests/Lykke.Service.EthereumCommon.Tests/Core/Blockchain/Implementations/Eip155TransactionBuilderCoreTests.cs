@@ -27,8 +27,6 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
             
             var transactionBuilderCore = new Eip155TransactionBuilderCore(blockchainType, isMainNet);
 
-            var dbg = transactionBuilderCore.BuildRawTransaction(transactionElements, privateKey).ToHexString();
-            
             transactionBuilderCore.BuildRawTransaction(transactionElements, privateKey)
                 .Should()
                 .Equal(expectedRawTransaction);
