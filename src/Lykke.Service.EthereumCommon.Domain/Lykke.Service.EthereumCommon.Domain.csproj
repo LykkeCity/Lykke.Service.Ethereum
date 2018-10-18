@@ -39,8 +39,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Lykke.Service.EthereumCommon.Core\Lykke.Service.EthereumCommon.Core.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services" />
-  </ItemGroup>
 
 </Project>

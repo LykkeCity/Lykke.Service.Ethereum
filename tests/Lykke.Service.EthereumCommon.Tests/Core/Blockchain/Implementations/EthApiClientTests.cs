@@ -8,13 +8,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
 {
     [TestClass]
-    public class RpcClientTests
+    public class EthApiClientTests
     {
-        private readonly RpcClient _rpcClient;
+        private readonly EthApiClient _ethApiClient;
         
-        public RpcClientTests()
+        public EthApiClientTests()
         {
-            _rpcClient = new RpcClient
+            _ethApiClient = new EthApiClient
             (
                 new RpcClientCoreMock("RpcClient")
             );
@@ -24,7 +24,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetBalanceAsync()
         {
-            (await _rpcClient.GetBalanceAsync("0x57f4037aa7cb557e5371c822715f4d58cfd68850"))
+            (await _ethApiClient.GetBalanceAsync("0x57f4037aa7cb557e5371c822715f4d58cfd68850"))
                 .Should()
                 .Be(BigInteger.Parse("27373492288275529"));
         }
@@ -32,7 +32,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetBalanceAsync__Block_Number_Passed()
         {
-            (await _rpcClient.GetBalanceAsync("0x57f4037aa7cb557e5371c822715f4d58cfd68850", new BigInteger(42)))
+            (await _ethApiClient.GetBalanceAsync("0x57f4037aa7cb557e5371c822715f4d58cfd68850", new BigInteger(42)))
                 .Should()
                 .Be(BigInteger.Parse("27373492288275528"));
         }
@@ -40,7 +40,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetBestBlockNumberAsync()
         {
-            (await _rpcClient.GetBestBlockNumberAsync())
+            (await _ethApiClient.GetBestBlockNumberAsync())
                 .Should()
                 .Be(BigInteger.Parse("815294"));
         }
@@ -50,7 +50,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         {            
             ValidateBlock
             (
-                await _rpcClient.GetBlockAsync(false),
+                await _ethApiClient.GetBlockAsync(false),
                 false
             );
         }
@@ -60,7 +60,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         {
             ValidateBlock
             (
-                await _rpcClient.GetBlockAsync(true),
+                await _ethApiClient.GetBlockAsync(true),
                 true
             );
         }
@@ -70,7 +70,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         {
             ValidateBlock
             (
-                await _rpcClient.GetBlockAsync("0x35c9a41ae1380141d1163c3ada714a924842fb7519f1a07ae2c21a94d2fa84be", false),
+                await _ethApiClient.GetBlockAsync("0x35c9a41ae1380141d1163c3ada714a924842fb7519f1a07ae2c21a94d2fa84be", false),
                 false
             );
         }
@@ -80,7 +80,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         {
             ValidateBlock
             (
-                await _rpcClient.GetBlockAsync("0x35c9a41ae1380141d1163c3ada714a924842fb7519f1a07ae2c21a94d2fa84be", true),
+                await _ethApiClient.GetBlockAsync("0x35c9a41ae1380141d1163c3ada714a924842fb7519f1a07ae2c21a94d2fa84be", true),
                 true
             );
         }
@@ -88,7 +88,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetBlockAsync__Block_Hash_Passed_But_Block_Does_Not_Exist()
         {
-            var block = await _rpcClient.GetBlockAsync("0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331", false);
+            var block = await _ethApiClient.GetBlockAsync("0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331", false);
             
             block
                 .Should()
@@ -100,7 +100,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         {
             ValidateBlock
             (
-                await _rpcClient.GetBlockAsync(816669, false),
+                await _ethApiClient.GetBlockAsync(816669, false),
                 false
             );
         }
@@ -110,7 +110,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         {
             ValidateBlock
             (
-                await _rpcClient.GetBlockAsync(816669, true),
+                await _ethApiClient.GetBlockAsync(816669, true),
                 true
             );
         }
@@ -118,7 +118,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetBlockAsync__Block_Number_Passed_But_Block_Does_Not_Exist()
         {
-            var block = await _rpcClient.GetBlockAsync(436, false);
+            var block = await _ethApiClient.GetBlockAsync(436, false);
 
             block
                 .Should()
@@ -128,7 +128,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetCodeAsync()
         {
-            (await _rpcClient.GetCodeAsync("0x57f4037aa7cb557e5371c822715f4d58cfd68850"))
+            (await _ethApiClient.GetCodeAsync("0x57f4037aa7cb557e5371c822715f4d58cfd68850"))
                 .Should()
                 .Be("0x600180600b6000396000f3");
         }
@@ -136,7 +136,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetGasPriceAsync()
         {
-            (await _rpcClient.GetGasPriceAsync())
+            (await _ethApiClient.GetGasPriceAsync())
                 .Should()
                 .Be(BigInteger.Parse("255"));
         }
@@ -144,7 +144,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetTransactionAsync()
         {
-            var transaction = await _rpcClient.GetTransactionAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae073");
+            var transaction = await _ethApiClient.GetTransactionAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae073");
 
             transaction.Value
                 .Should()
@@ -194,7 +194,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetTransactionAsync__Transaction_Is_Pending()
         {
-            var transaction = await _rpcClient.GetTransactionAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae074");
+            var transaction = await _ethApiClient.GetTransactionAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae074");
 
             transaction.Value
                 .Should()
@@ -244,7 +244,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetTransactionReceiptAsync()
         {
-            var transactionReceipt = await _rpcClient.GetTransactionReceiptAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae073");
+            var transactionReceipt = await _ethApiClient.GetTransactionReceiptAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae073");
 
             transactionReceipt.BlockNumber
                 .Should()
@@ -282,7 +282,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task GetTransactionReceiptAsync__Transaction_Is_Pending()
         {
-            var transactionReceipt = await _rpcClient.GetTransactionReceiptAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae074");
+            var transactionReceipt = await _ethApiClient.GetTransactionReceiptAsync("0x058c2496f3d1387ef8ec349f0091d1806112f0d9d983c9aa88cbdb0bca8ae074");
 
             transactionReceipt
                 .Should()
@@ -292,7 +292,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
         [TestMethod]
         public async Task SendRawTransactionAsync()
         {
-            (await _rpcClient.SendRawTransactionAsync("0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"))
+            (await _ethApiClient.SendRawTransactionAsync("0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"))
                 .Should()
                 .Be("0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331");
         }

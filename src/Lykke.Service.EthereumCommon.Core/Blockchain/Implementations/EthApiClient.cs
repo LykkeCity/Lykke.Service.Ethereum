@@ -9,12 +9,12 @@ using Newtonsoft.Json.Linq;
 
 namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
 {
-    public class RpcClient : IRpcClient
+    public class EthApiClient : IEthApiClient
     {
         private readonly IRpcClientCore _core;
 
         
-        public RpcClient(
+        public EthApiClient(
             IRpcClientCore core)
         {
             _core = core;

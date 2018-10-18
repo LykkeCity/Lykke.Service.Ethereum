@@ -17,7 +17,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Extensions
             string code,
             bool isContract)
         {
-            var clientMock = new Mock<IRpcClient>();
+            var clientMock = new Mock<IEthApiClient>();
 
             clientMock
                 .Setup(x => x.GetCodeAsync(It.IsAny<string>()))
@@ -38,7 +38,7 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Extensions
             string code,
             bool isWallet)
         {
-            var clientMock = new Mock<IRpcClient>();
+            var clientMock = new Mock<IEthApiClient>();
 
             clientMock
                 .Setup(x => x.GetCodeAsync(It.IsAny<string>()))

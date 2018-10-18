@@ -4,7 +4,7 @@ using Lykke.Service.Ethereum.Core.Blockchain.DTOs;
 
 namespace Lykke.Service.Ethereum.Core.Blockchain
 {
-    public interface IRpcClient
+    public interface IEthApiClient
     {
         Task<BigInteger> GetBalanceAsync(
             string address);

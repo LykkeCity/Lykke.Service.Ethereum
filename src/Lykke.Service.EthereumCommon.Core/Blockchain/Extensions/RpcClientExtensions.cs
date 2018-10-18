@@ -13,19 +13,19 @@ namespace Lykke.Service.Ethereum.Core.Blockchain.Extensions
         
         
         public static async Task<bool> IsContractAsync(
-            this IRpcClient rpcClient,
+            this IEthApiClient ethApiClient,
             string address)
         {
-            var code = await rpcClient.GetCodeAsync(address);
+            var code = await ethApiClient.GetCodeAsync(address);
 
             return !WalletCodeVariants.Contains(code);
         }
         
         public static async Task<bool> IsWalletAsync(
-            this IRpcClient rpcClient,
+            this IEthApiClient ethApiClient,
             string address)
         {
-            var code = await rpcClient.GetCodeAsync(address);
+            var code = await ethApiClient.GetCodeAsync(address);
 
             return WalletCodeVariants.Contains(code);
         }

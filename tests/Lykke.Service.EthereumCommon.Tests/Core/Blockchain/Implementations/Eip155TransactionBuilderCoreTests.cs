@@ -1,6 +1,6 @@
 using FluentAssertions;
-using Lykke.Service.Ethereum.Core.Blockchain.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace Lykke.Service.Ethereum.Core.Blockchain.Implementations
 {
