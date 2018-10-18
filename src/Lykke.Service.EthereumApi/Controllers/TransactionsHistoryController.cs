@@ -26,14 +26,16 @@ namespace Lykke.Service.EthereumApi.Controllers
 
         [Obsolete]
         [HttpPost("to/{address}/observation")]
-        public IActionResult BeginIncomingHistoryObservation()
+        public IActionResult BeginIncomingHistoryObservation(
+            AddressRequest request)
         {
             return Ok();
         }
         
         [Obsolete]
         [HttpPost("from/{address}/observation")]
-        public IActionResult BeginOutgoingHistoryObservation()
+        public IActionResult BeginOutgoingHistoryObservation(
+            AddressRequest request)
         {
             return Ok();
         }

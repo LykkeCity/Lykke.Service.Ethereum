@@ -106,7 +106,8 @@ namespace Lykke.Service.EthereumCommon.Core
         private static bool ValidateFormat(
             string addressString)
         {
-            return AddressStringExpression.IsMatch(addressString);
+            return addressString != null 
+                && AddressStringExpression.IsMatch(addressString);
         }
         
         private static void ValidateFormatAndThrowIfInvalid(
