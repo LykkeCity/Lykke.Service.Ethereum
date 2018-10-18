@@ -13,7 +13,7 @@ namespace Lykke.Service.EthereumApi.Validation
                 .AddressMustBeValid();
 
             RuleFor(x => x.Take)
-                .GreaterThan(1);
+                .GreaterThan(0);
         }
     }
 }
