@@ -23,7 +23,20 @@ namespace Lykke.Service.EthereumApi.Controllers
         {
             _transactionHistoryService = transactionHistoryService;
         }
+
+        [Obsolete]
+        [HttpPost("to/{address}/observation")]
+        public IActionResult BeginIncomingHistoryObservation()
+        {
+            return Ok();
+        }
         
+        [Obsolete]
+        [HttpPost("from/{address}/observation")]
+        public IActionResult BeginOutgoingHistoryObservation()
+        {
+            return Ok();
+        }
         
         [HttpGet("to/{address}")]
         public async Task<ActionResult<IEnumerable<HistoricalTransactionContract>>> GetIncomingHistory(
