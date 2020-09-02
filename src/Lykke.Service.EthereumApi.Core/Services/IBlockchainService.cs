@@ -16,7 +16,8 @@ namespace Lykke.Service.EthereumApi.Core.Services
             [NotNull] string to,
             BigInteger amount,
             BigInteger gasAmount,
-            BigInteger gasPrice);
+            BigInteger gasPrice,
+            BigInteger? nonce);
 
         Task<BigInteger?> TryEstimateGasAmountAsync(
             [NotNull] string from,

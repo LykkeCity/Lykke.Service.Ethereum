@@ -26,7 +26,7 @@ namespace Lykke.Service.EthereumApi.Controllers
         
         [HttpPost("single")]
         public async Task<ActionResult<BuildTransactionResponse>> Build(
-            [FromBody] BuildSingleTransactionRequest request)
+            [FromBody] BuildSingleTransactionRequestExt request)
         {
             var amount = BigInteger.Parse(request.Amount);
             var from = request.FromAddress.ToLowerInvariant();
@@ -38,7 +38,8 @@ namespace Lykke.Service.EthereumApi.Controllers
                 from: from,
                 to: to,
                 amount: amount,
-                includeFee: request.IncludeFee
+                includeFee: request.IncludeFee,
+                nonce: request.Nonce
             );
 
             if (buildResult is BuildTransactionResult.TransactionContext txContext)

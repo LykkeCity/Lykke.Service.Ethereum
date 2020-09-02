@@ -6,7 +6,6 @@ using Common.Log;
 using JetBrains.Annotations;
 using Lykke.Common.Log;
 using Lykke.Service.EthereumApi.Core.Services;
-using Lykke.Service.EthereumCommon.Core;
 using Lykke.Service.EthereumCommon.Core.Crypto;
 using Lykke.Service.EthereumCommon.Core.Domain;
 using Lykke.Service.EthereumCommon.Services;
@@ -105,14 +104,15 @@ namespace Lykke.Service.EthereumApi.Services
             string to,
             BigInteger amount,
             BigInteger gasAmount,
-            BigInteger gasPrice)
+            BigInteger gasPrice,
+            BigInteger? nonce)
         {
             var transaction = new UnsignedTransaction
             {
                 Amount = amount,
                 GasAmount = gasAmount,
                 GasPrice = gasPrice,
-                Nonce = await GetNextNonceAsync(from),
+                Nonce = nonce ?? await GetNextNonceAsync(from),
                 To = to
             };
 
