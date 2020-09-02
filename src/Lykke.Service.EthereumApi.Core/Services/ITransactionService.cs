@@ -16,7 +16,8 @@ namespace Lykke.Service.EthereumApi.Core.Services
             [NotNull] string from,
             [NotNull] string to,
             BigInteger amount,
-            bool includeFee);
+            bool includeFee,
+            long? nonce);
 
         [ItemNotNull]
         Task<BroadcastTransactionResult> BroadcastTransactionAsync(

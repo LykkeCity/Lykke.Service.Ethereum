@@ -64,7 +64,8 @@ namespace Lykke.Service.EthereumApi.Services
             string from,
             string to,
             BigInteger amount,
-            bool includeFee)
+            bool includeFee,
+            long? nonce)
         {
             var transaction = await _transactionRepository.TryGetAsync(transactionId);
 
@@ -133,7 +134,8 @@ namespace Lykke.Service.EthereumApi.Services
                     to,
                     amount,
                     gasAmount,
-                    gasPrice
+                    gasPrice,
+                    nonce
                 );
                 
                 transaction = Transaction.Build
