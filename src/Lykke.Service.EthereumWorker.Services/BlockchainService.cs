@@ -10,6 +10,7 @@ using Lykke.Service.EthereumWorker.Core.Services;
 using Lykke.Service.EthereumWorker.Services.Models;
 using Nethereum.Hex.HexTypes;
 using Nethereum.JsonRpc.Client;
+using Nethereum.RPC.Eth.Blocks;
 using Nethereum.RPC.Eth.DTOs;
 
 using TransactionReceipt = Lykke.Service.EthereumCommon.Core.Domain.TransactionReceipt;
@@ -57,9 +58,10 @@ namespace Lykke.Service.EthereumWorker.Services
 
         public async Task<BigInteger> GetBestTrustedBlockNumberAsync()
         {
+            var getBlockNumber = Web3.Eth.Blocks.GetBlockNumber as EthBlockNumber ?? throw new ArgumentNullException(nameof(Web3.Eth.Blocks.GetBlockNumber));
             var bestBlockNumber = await SendRequestWithTelemetryAsync<HexBigInteger>
             (
-                Web3.Eth.Blocks.GetBlockNumber.BuildRequest()
+                getBlockNumber.BuildRequest()
             );
 
             return bestBlockNumber.Value - _confirmationLevel;
