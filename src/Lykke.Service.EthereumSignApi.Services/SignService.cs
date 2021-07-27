@@ -8,7 +8,7 @@ using Microsoft.ApplicationInsights;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Signer;
 
-using NethereumTransaction = Nethereum.Signer.Transaction;
+using NethereumTransaction = Nethereum.Signer.LegacyTransaction;
 
 
 namespace Lykke.Service.EthereumSignApi.Services
