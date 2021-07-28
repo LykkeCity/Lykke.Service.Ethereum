@@ -6,7 +6,6 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Nethereum.JsonRpc.Client;
 using Nethereum.Parity;
-using Nethereum.RPC.Eth.DTOs;
 
 namespace Lykke.Service.EthereumCommon.Services
 {
@@ -32,7 +31,7 @@ namespace Lykke.Service.EthereumCommon.Services
         {
             var code = await SendRequestWithTelemetryAsync<string>
             (
-                Web3.Eth.GetCode.BuildRequest(address, BlockParameter.CreateLatest(), Guid.NewGuid())
+                Web3.Eth.GetCode.BuildRequest(Guid.NewGuid(), address, "latest")
             );
             
             return code == "0x";

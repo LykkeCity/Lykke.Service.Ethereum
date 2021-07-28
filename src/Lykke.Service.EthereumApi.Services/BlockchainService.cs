@@ -15,7 +15,6 @@ using MessagePack;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Hex.HexTypes;
 using Nethereum.JsonRpc.Client;
-using Nethereum.RPC.Eth;
 using Nethereum.RPC.Eth.DTOs;
 
 using Transaction = Nethereum.RPC.Eth.DTOs.Transaction;
@@ -165,10 +164,9 @@ namespace Lykke.Service.EthereumApi.Services
         {   
             await UpdateMinAndMaxGasPricesAsync();
 
-            var ethgasPrice = Web3.Eth.GasPrice as EthGasPrice ?? throw new ArgumentNullException(nameof(Web3.Eth.GasPrice));
             var estimatedGasPrice = await SendRequestWithTelemetryAsync<HexBigInteger>
             (
-                ethgasPrice.BuildRequest()
+                Web3.Eth.GasPrice.BuildRequest()
             );
             
             if (estimatedGasPrice.Value > _maxGasPrice)
