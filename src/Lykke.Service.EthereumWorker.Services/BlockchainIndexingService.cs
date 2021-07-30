@@ -104,6 +104,11 @@ namespace Lykke.Service.EthereumWorker.Services
                         // Get non-indexed blocks
                         foreach (var blockNumber in indexationState.GetNonIndexedBlockNumbers())
                         {
+                            if (blockNumber < 6500000)
+                            {
+                                break;
+                            }
+                            
                             if (blockLocks.All(x => x.BlockNumber != blockNumber))
                             {
                                 try
