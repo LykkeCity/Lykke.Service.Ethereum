@@ -8,7 +8,18 @@ namespace Lykke.Service.EthereumApi.Controllers
     public class CapabilitiesController : Controller
     {
         private static readonly CapabilitiesResponse CapabilitiesResponse = 
-            new CapabilitiesResponse();
+            new CapabilitiesResponse()
+            {
+                AreManyInputsSupported = false,
+                AreManyOutputsSupported = false,
+                CanReturnExplorerUrl = false,
+                IsAddressMappingRequired = false,
+                IsExclusiveWithdrawalsRequired = false,
+                IsPublicAddressExtensionRequired = false,
+                IsReceiveTransactionRequired = false,
+                IsTestingTransfersSupported = true,
+                IsTransactionsRebuildingSupported = false
+            };
 
         
         [HttpGet]

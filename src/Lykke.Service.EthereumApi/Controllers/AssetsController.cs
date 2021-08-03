@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+﻿    using JetBrains.Annotations;
 using Lykke.Service.BlockchainApi.Contract;
 using Lykke.Service.BlockchainApi.Contract.Assets;
 using Lykke.Service.EthereumApi.Models;
