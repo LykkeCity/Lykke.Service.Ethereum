@@ -17,7 +17,7 @@ namespace Lykke.Service.EthereumApi.Controllers
                 IsExclusiveWithdrawalsRequired = false,
                 IsPublicAddressExtensionRequired = false,
                 IsReceiveTransactionRequired = false,
-                IsTestingTransfersSupported = true,
+                IsTestingTransfersSupported = false,
                 IsTransactionsRebuildingSupported = false
             };
 

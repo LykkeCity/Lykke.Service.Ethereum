@@ -9,8 +9,8 @@ namespace Lykke.Service.EthereumApi.Validation
     {
         public AssetRequestValidator()
         {
-            RuleFor(x => x.AssetId)
-                .AssetMustBeSupported();
+            //RuleFor(x => x.AssetId)
+            //    .AssetMustBeSupported();
         }
     }
 }
