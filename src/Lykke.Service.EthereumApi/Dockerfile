@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1.0-aspnetcore-runtime
+FROM swisschains/dotnet:2.2-aspnetcore-runtime
 WORKDIR /app
 COPY . .
 ENTRYPOINT ["dotnet", "Lykke.Service.EthereumApi.dll"]
