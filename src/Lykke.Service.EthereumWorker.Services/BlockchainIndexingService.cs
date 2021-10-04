@@ -96,7 +96,7 @@ namespace Lykke.Service.EthereumWorker.Services
                         {
                             blockLocks.Remove(@lock);
 
-                            _log.Debug($"Releasing expired indexation lock for block {@lock.BlockNumber}...");
+                            _log.Info($"Releasing expired indexation lock for block {@lock.BlockNumber}...");
 
                             await ReleaseBlockLockAsync(@lock.BlockNumber);
                         }
@@ -138,7 +138,7 @@ namespace Lykke.Service.EthereumWorker.Services
                         await stateLock.ReleaseAsync();
                     }
 
-                    _log.Debug
+                    _log.Info
                     (
                         nonIndexedBlocks.Any()
                             ? $"Got non-indexed blocks [{string.Join(", ", nonIndexedBlocks)}]."
