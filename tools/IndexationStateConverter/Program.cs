@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Lykke.Service.EthereumWorker.AzureRepositories;
 using Lykke.Service.EthereumWorker.Core.Domain;
 using Lykke.SettingsReader.ReloadingManager;
+using MessagePack;
 using Newtonsoft.Json;
 
 namespace IndexationStateConverter
@@ -22,16 +23,31 @@ namespace IndexationStateConverter
                 return;
             }
 
-            var connectionString = ConstantReloadingManager.From(args[1]);
-            var repository = BlockchainIndexationStateRepository.Create(connectionString);
-
             if (args[0] == "read")
             {
+                var connectionString = ConstantReloadingManager.From(args[1]);
+                var repository = BlockchainIndexationStateRepository.Create(connectionString);
+
                 await Read(repository);
             }
             else if (args[0] == "write")
             {
+                var connectionString = ConstantReloadingManager.From(args[1]);
+                var repository = BlockchainIndexationStateRepository.Create(connectionString);
+
                 await Write(repository);
+            }
+            else if (args[0] == "read-file")
+            {
+                var sourceFilePath = args[1];
+
+                await ReadFile(sourceFilePath);
+            }
+            else if (args[0] == "write-file")
+            {
+                var destinationFilePath = args[1];
+
+                await WriteFile(destinationFilePath);
             }
             else
             {
@@ -54,6 +70,28 @@ namespace IndexationStateConverter
             await File.WriteAllTextAsync("state.json", json);
         }
 
+        private static async Task ReadFile(string filePath)
+        {
+            Console.WriteLine($"Reading the state from the file {filePath}...");
+
+            using var stream = File.OpenRead(filePath);
+
+            var state = BlockchainIndexationState.Restore
+            (
+                await MessagePackSerializer.DeserializeAsync<IEnumerable<BlocksIntervalIndexationState>>(stream)
+            );
+
+            Console.WriteLine("Serializing the state to json...");
+
+            var json = JsonConvert.SerializeObject(state.AsEnumerable(), Formatting.Indented);
+
+            Console.WriteLine("Serializing the state json to the 'state.json' file...");
+
+            await File.WriteAllTextAsync("state.json", json);
+
+            stream.Close();
+        }
+
         private static async Task Write(BlockchainIndexationStateRepository repository)
         {
             Console.WriteLine("Reading the state from the 'state.json' file...");
@@ -70,6 +108,31 @@ namespace IndexationStateConverter
             Console.WriteLine("Saving the state to BLOB...");
 
             await repository.UpdateAsync(state);
+        }
+
+        private static async Task WriteFile(string destinationFile)
+        {
+            Console.WriteLine("Reading the state from the 'state.json' file...");
+
+            var json = await File.ReadAllTextAsync("state.json");
+
+            Console.WriteLine("Deserializing the state from json...");
+
+            var intervals = JsonConvert.DeserializeObject<IEnumerable<BlocksIntervalIndexationState>>(json);
+            var state = BlockchainIndexationState.Restore(intervals);
+
+            Console.WriteLine($"Saving the state to the file {destinationFile}...");
+
+            using var serializationStream = new MemoryStream();
+            await MessagePackSerializer.SerializeAsync(serializationStream, (IEnumerable<BlocksIntervalIndexationState>)state);
+
+            serializationStream.Position = 0;
+
+            using var writeStream = File.OpenWrite(destinationFile);
+
+            await serializationStream.CopyToAsync(writeStream);
+
+            writeStream.Close();
         }
     }
 }
